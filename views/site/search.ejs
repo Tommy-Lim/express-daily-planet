@@ -1,4 +1,7 @@
 <h3>Search Resuls:</h3>
+<% if (searchResults.length === 0) { %>
+  <p>No results.</p>
+<% } %>
 <% searchResults.forEach(function(article){ %>
   <h3>
     <a href="/articles/show/<%- article.id %>"<%- article.title %></a>

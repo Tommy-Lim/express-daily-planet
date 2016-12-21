@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({extended: false})); //boilerplate
 //ROUTES
 //goes to home page of site
 app.get('/',function(req,res){
+  console.log("home querystring:", req.query);
   res.render('site/home');
 });
 
@@ -56,17 +57,25 @@ app.get('/contact', function(req,res){
 });
 
 app.get('/search', function(req,res){
-  var q = req.params.queryString;
+  console.log("search querystring:", req.query);
+  var q = req.query.search;
 
-  console.log("query is: "+q);
+  console.log(q+'');
+  console.log("got to search results ??dog");
 
   function isMatch(article,q){
     q = q.toLowerCase();
-    var title = article.title.toLowerCase();
-    var content = article.body.toLowerCase();
+    console.log("match?", article.get('title'));
+    // Wrong and bad. We must use .get() function
+    // to access instance attributes.
+    // var title = article.title.toLowerCase();
+    // var content = article.body.toLowerCase();
+    var title = article.get('title').toLowerCase();
+    var content = article.get('body').toLowerCase();
     if(title.indexOf(q)>=0||content.indexOf(q)>=0){
       return true;
     }
+    return false;
   }
 
   db.news.findAll().then(function(articles){

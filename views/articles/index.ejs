@@ -1,7 +1,9 @@
 <h3>Articles:</h3>
 <% articles.forEach(function(article){ %>
   <h3>
-    <a href="/articles/show/<%- article.id %>"><%- article.title %></a>
+    <a href="/articles/show/<%- article.id %>">
+      <%- article.title %>
+    </a>
   </h3>
   <p>
     <%- article.body %>
